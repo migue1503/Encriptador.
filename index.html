@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es-mx">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encriptador de Mensajes</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header></header>
+    <main class="estilo">
+        <section class="estilo__presentacion">
+            <h1 class="estilo__presentacion__titulo"><strong>Encriptador</strong> <span>de Mensajes</span></h1>
+            <textarea class="cuadro__detexto" id="inputTexto" placeholder="Ingresa tu mensaje para encriptar o desencriptar."></textarea>
+            <div class="botones__funcionales">
+                <button class="boton__1" onclick="encriptar()">Encriptar</button>
+                <button class="boton__1" onclick="desencriptar()">Desencriptar</button>
+            </div>
+        </section>
+        
+        <section class="contenedor">
+            <div class="cuadro__resultado">
+
+                <p class="texto__encriptado" id="resultado"></p>
+                <p class="texto__encriptado" id="mensajeError">No se encontró ningún texto</p>
+                <button class="boton__2" onclick="copiarTexto()">Copiar Resultado</button>
+            
+                <img id="imagenEncriptador" src="Screenshot 2024-08-20 9.03.17 PM.png" alt="Importancia de encriptar equipos" width="50%">
+            </div>
+        </section>
+
+    </main>
+    <script>
+        function encriptar() {
+            let texto = document.getElementById("inputTexto").value;
+            let mensajeError = document.getElementById("mensajeError");
+            let imagen = document.getElementById("imagenEncriptador");
+
+            if (texto === "") {
+                mensajeError.style.display = "block";
+                document.getElementById("resultado").innerText = "";
+                imagen.style.display = "block"; 
+                return;
+            } else {
+                mensajeError.style.display = "none";
+            }
+
+            if (!/^[a-z\s]*$/.test(texto)) {
+                alert("Solo se permiten letras minúsculas y espacios.");
+                return;
+            }
+
+            let textoEncriptado = texto.replace(/e/g, "enter").replace(/i/g, "imes").replace(/a/g, "ai").replace(/o/g, "ober").replace(/u/g, "ufat");
+            document.getElementById("resultado").innerText = textoEncriptado;
+
+            imagen.style.display = "none"; 
+        }
+
+        function desencriptar() {
+            let texto = document.getElementById("inputTexto").value;
+            let mensajeError = document.getElementById("mensajeError");
+            let imagen = document.getElementById("imagenEncriptador");
+
+            if (texto === "") {
+                mensajeError.style.display = "block";
+                document.getElementById("resultado").innerText = "";
+                imagen.style.display = "block"; 
+                return;
+            } else {
+                mensajeError.style.display = "none";
+            }
+
+            let textoDesencriptado = texto.replace(/enter/g, "e").replace(/imes/g, "i").replace(/ai/g, "a").replace(/ober/g, "o").replace(/ufat/g, "u");
+            document.getElementById("resultado").innerText = textoDesencriptado;
+
+            imagen.style.display = "none"; 
+        }
+
+        function copiarTexto() {
+            let texto = document.getElementById("resultado").innerText;
+            navigator.clipboard.writeText(texto).then(() => {
+                document.getElementById("inputTexto").value = "";  
+                document.getElementById("resultado").innerText = "";   
+            });
+        }
+    </script>
+    <footer></footer>
+</body>
+
+</html>
+
+
+
